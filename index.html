@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Delivery</title>
+    <link rel="shortcut icon" href="assets/images/icons/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="index.html">
+            <h2>Food delivery</h2>
+        </a>
+
+        <a href="./templates/cart.html">
+            <div class="cart">
+                <img src="assets/images/icons/shopping-cart.png" alt="shopping cart" srcset="">
+                <div id="cartAmount" class="cartAmount">0</div>
+            </div>
+        </a>
+
+    </div>
+
+    <div class="layout layout-shop">
+        <aside class="sidebar">
+            <ul class="restaurants">
+                <li class="restaurants-item active" data-restaurant="macdonalds">McDonald’s</li>
+                <li class="restaurants-item" data-restaurant="sushishop">Sushi Shop</li>
+                <li class="restaurants-item" data-restaurant="pizzamario">Pizza Mario</li>
+            </ul>
+            <p class="restaurants-note">please select one restaurant to order</p>
+        </aside>
+        <main class="content content-shop">
+            <div class="shop" id="shop"></div>
+        </main>
+    </div>
+
+    <script src="./index.js"></script>
+</body>
+
+</html>

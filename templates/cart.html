@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Delivery</title>
+    <link rel="shortcut icon" href="../assets/images/icons/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="../index.html">
+            <h2>Food delivery</h2>
+        </a>
+
+        <a href="./cart.html">
+            <div class="cart">
+                <img src="../assets/images/icons/shopping-cart.png" alt="shopping cart" srcset="">
+                <div id="cartAmount" class="cartAmount">0</div>
+            </div>
+        </a>
+
+    </div>
+
+    <div class="layout">
+        <div id="shopping-cart-info" class="shopping-cart-info"></div>
+        <main class="content content-cart">
+            <div id="cart-form-wrapper">
+                <h3>Your info</h3>
+                <p>Please enter your shipping details.</p>
+                <form action="" class="cart-form" id="cart-form">
+                    <label class="cart-form-field">
+                        <span class="cart-form-label" for="firstname">First name</span>
+                        <input class="cart-form-input" name="name" type="text" id="firstname" data-type="name" />
+                    </label>
+                    <label class="cart-form-field">
+                        <span class="cart-form-label" for="email">Email</span>
+                        <input class="cart-form-input" name="email" type="email" id="email"
+                            placeholder="client@gmail.com" data-type="email" />
+                    </label>
+                    <label class="cart-form-field">
+                        <span class="cart-form-label" for="phone">Phone</span>
+                        <input class="cart-form-input" name="phone" type="tel" id="phone" placeholder="(093) 000-0000"
+                            data-type="phone" />
+                    </label>
+                    <label class="cart-form-field">
+                        <span class="cart-form-label" for="address">Address</span>
+                        <input class="cart-form-input" name="address" type="text" id="address" data-type="address" />
+                    </label>
+                    <button class="cart-form-submit" type="submit">Order!</button>
+                </form>
+            </div>
+            <div class="shopping-cart" id="shopping-cart"></div>
+        </main>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
+
+    <script src="../assets/js/cart.js"></script>
+    <script src="../assets/js/formSubmitting.js"></script>
+
+</body>
+
+</html>
