@@ -9,6 +9,22 @@ async function getShopItemsData() {
     return shopItemsData;
 }
 
+async function generateRestaurants() {
+    const data = await getShopItemsData();
+    const restaurants = document.querySelector('#restaurants');
+    const restaurantsSet = new Set;
+    data.map(item => {
+        restaurantsSet.add(item.restaurant);
+    });
+
+    return restaurants.innerHTML = Array.from(restaurantsSet).map((item) => {
+        const active = activeRestaurant ? activeRestaurant : 'macdonalds';
+        return `
+            <li class="restaurants-item ${active == item ? 'active' : ''}" data-restaurant=${item}>${item}</li>
+        `
+    }).join('');
+}
+
 async function generateShop() {
     const data = await getShopItemsData();
     const menuFor = document.querySelector('.restaurants-item.active').dataset.restaurant;
@@ -56,8 +72,6 @@ function increment(id) {
         activeRestaurant = res;
     };
     updateQuantity(id);
-
-    console.log(activeRestaurant, basket);
 
     localStorage.setItem("data", JSON.stringify(basket));
 };
@@ -110,10 +124,15 @@ function makeActiveRestaurant() {
     }
 }
 
+async function toStart() {
+    await generateRestaurants()
+    await generateShop();
+    await calculateCartAmount();
+    await makeActiveRestaurant();
+}
+
 window.addEventListener('load', () => {
-    generateShop();
-    calculateCartAmount();
-    makeActiveRestaurant();
+    toStart();
 });
 
 document.addEventListener('click', e => {

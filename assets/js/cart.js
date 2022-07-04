@@ -22,7 +22,7 @@ async function generateCartItems() {
 
                 return `
                     <div class="cart-item">
-                        <img src=${img} alt="" />
+                        <img src=../${img} alt="" />
                         <div class="cart-item-details">
                         
                             <div class="cart-item-title">
