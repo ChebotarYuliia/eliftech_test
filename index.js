@@ -1,12 +1,29 @@
+const firebaseConfig = {
+    apiKey: "AIzaSyCgUc7h-rgsjdFAKFRBA7rogO1TUDfpMv0",
+    authDomain: "eliftech-delivery-app.firebaseapp.com",
+    databaseURL: "https://eliftech-delivery-app-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "eliftech-delivery-app",
+    storageBucket: "eliftech-delivery-app.appspot.com",
+    messagingSenderId: "603214252224",
+    appId: "1:603214252224:web:efebe678862c264e5e8525"
+};
+
+const app = firebase.initializeApp(firebaseConfig);
+const db = app.firestore();
+
+
 const shop = document.getElementById('shop');
 let activeRestaurant = JSON.parse(localStorage.getItem("data"))?.[0]?.restaurant || null;
 
 const basket = JSON.parse(localStorage.getItem("data")) || [];
 
 async function getShopItemsData() {
-    let response = await fetch('./shopItemsData.json');
-    const shopItemsData = await response.json();
-    return shopItemsData;
+    const items = await db.collection('res').get();
+    const itemsData = [];
+    items.forEach(doc => {
+        itemsData.push(doc.data());
+    });
+    return itemsData;
 }
 
 async function generateRestaurants() {
