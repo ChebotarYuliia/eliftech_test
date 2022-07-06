@@ -4,9 +4,12 @@ const cartInfo = document.getElementById("shopping-cart-info");
 let basket = JSON.parse(localStorage.getItem("data")) || [];
 
 async function getShopItemsData() {
-    let response = await fetch('../../shopItemsData.json');
-    const shopItemsData = await response.json();
-    return shopItemsData;
+    const items = await db.collection('res').get();
+    const itemsData = [];
+    items.forEach(doc => {
+        itemsData.push(doc.data());
+    });
+    return itemsData;
 }
 
 async function generateCartItems() {
@@ -61,13 +64,7 @@ function increment(id) {
 
     if (item) {
         item.quantity += 1;
-    } else {
-        basket.push({
-            id: id,
-            quantity: 1,
-            restaurant: res,
-        });
-    };
+    }
     updateQuantity(id);
 
     localStorage.setItem("data", JSON.stringify(basket));

@@ -29,6 +29,7 @@
         <div id="shopping-cart-info" class="shopping-cart-info"></div>
         <main class="content content-cart">
             <div id="cart-form-wrapper">
+                <div id="map"></div>
                 <h3>Your info</h3>
                 <p>Please enter your shipping details.</p>
                 <form action="" class="cart-form" id="cart-form">
@@ -57,12 +58,17 @@
         </main>
     </div>
 
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvG8kjXC2Si1Bm2ERtY-DoUkcl7CJ1o0k&callback=initMap&libraries=places&v=weekly"
+        async defer></script>
+
     <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
 
     <script src="../assets/js/cart.js"></script>
     <script src="../assets/js/formSubmitting.js"></script>
+    <script src="../assets/js/mapInitialization.js"></script>
 
 </body>
 

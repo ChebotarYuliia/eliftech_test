@@ -13,9 +13,9 @@ const db = app.firestore();
 
 
 const shop = document.getElementById('shop');
-let activeRestaurant = JSON.parse(localStorage.getItem("data"))?.[0]?.restaurant || null;
+let activeRestaurant = localStorage.getItem("data") ? JSON.parse(localStorage.getItem("data"))?.[0]?.restaurant : null;
 
-const basket = JSON.parse(localStorage.getItem("data")) || [];
+const basket = localStorage.getItem("data") ? JSON.parse(localStorage.getItem("data")) : [];
 
 async function getShopItemsData() {
     const items = await db.collection('res').get();
@@ -35,7 +35,7 @@ async function generateRestaurants() {
     });
 
     return restaurants.innerHTML = Array.from(restaurantsSet).map((item) => {
-        const active = activeRestaurant ? activeRestaurant : 'macdonalds';
+        const active = activeRestaurant ? activeRestaurant : 'mcdonalds';
         return `
             <li class="restaurants-item ${active == item ? 'active' : ''}" data-restaurant=${item}>${item}</li>
         `
@@ -47,14 +47,15 @@ async function generateShop() {
     const menuFor = document.querySelector('.restaurants-item.active').dataset.restaurant;
 
     return shop.innerHTML = data.map(item => {
-        const { id, name, desc, img, price, restaurant } = item;
+        const { id, name, desc, img, price, restaurant, coords } = item;
+        const coordsStr = String(coords).split(', ').join(',');
 
         const chosen = basket.find(item => item.id == id);
         const shortedDesc = desc.length > 50 ? desc.slice(0, 50) + '...' : desc;
 
         if (restaurant === menuFor) {
             return `
-            <div id="product-id-${id}" class="product-item" data-restaurant=${restaurant}>
+            <div id="product-id-${id}" class="product-item" data-restaurant=${restaurant} data-coords=${coordsStr}>
                 <img  src=${img} alt="">
                 <div class="details">
                     <h3>${name}</h3>
@@ -75,7 +76,7 @@ async function generateShop() {
 };
 
 function increment(id) {
-    const res = document.querySelector(`#product-id-${id}`).dataset.restaurant;
+    const { restaurant, coords } = document.querySelector(`#product-id-${id}`).dataset;
     const item = basket.find(item => item.id == id);
 
     if (item) {
@@ -84,9 +85,10 @@ function increment(id) {
         basket.push({
             id: id,
             quantity: 1,
-            restaurant: res,
+            restaurant: restaurant,
+            coords: coords.split(','),
         });
-        activeRestaurant = res;
+        activeRestaurant = restaurant;
     };
     updateQuantity(id);
 
