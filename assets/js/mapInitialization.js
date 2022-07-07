@@ -127,7 +127,5 @@ function initMap() {
     });
 }
 
-if (basket.length) {
-    window.initMap = initMap;
-}
+window.initMap = initMap;
 
